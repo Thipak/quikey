@@ -6,14 +6,36 @@ const useTestStore = defineStore('test', {
   state: () => ({
     actual: '',
     typed: '',
+    typing: false,
   }),
   getters: {},
   actions:  {
     newLetter(letter) {
-      this.typed += letter;
-      console.log('typed', this.typed);
-      
+      // Check if the letter is enter
+      if(/^[a-zA-Z]$/.test(letter)){
+        this.typed += letter;
+        console.log('typed: ', this.typed);
+      } else if(letter === ' ') {
+        this.typed += ' ';
+        console.log('typed: ', this.typed);
+      }
     },
+    deleteLetter() {
+      // Check if the letter is enter
+      this.typed = this.typed.slice(0, -1);
+      console.log('typed: ', this.typed);
+    },
+    checkSentence() {
+      // Check if the sentence is completed
+      if (this.typed === this.actual) {
+        console.log('Sentence completed');
+        return true;
+      }
+      return false;
+    },
+    reset() {
+      this.typed = '';
+    }
   },
 });
 
