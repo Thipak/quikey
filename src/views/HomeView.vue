@@ -1,11 +1,15 @@
 <script setup>
 import { onMounted, onBeforeUnmount } from 'vue';
-import WordsComponent from '../components/WordsComponent.vue'
+import WordsComponent from '@/components/WordsComponent.vue'
+import useTestStore from '@/stores/quikTest.js'
 
 onMounted(() => {
   console.log('Component mounted'); // like componentDidMount
+  const testStore = useTestStore();
   window.addEventListener('keydown', (event) => {
+    
     console.log(event.key);
+    testStore.newLetter(event.key);
     if (event.key === ' ') {
       console.log('Space key pressed');
     }
@@ -25,7 +29,7 @@ onBeforeUnmount(() => {
 <!--  Keyboard image -->
 <!--  Retry or new text button -->
   <p>Hi This is home page</p>
-  <WordsComponent />
+  <WordsComponent  />
 </template>
 
 <style scoped>
