@@ -7,14 +7,21 @@ const useTestStore = defineStore('test', {
     actual: '',
     typed: '',
     typing: false,
+    wordCount: 0,
   }),
   getters: {},
   actions:  {
+    setWords(words) {
+      console.log('words: ', words);
+      // Set the actual sentence
+      this.actual = words.join(' ');
+      // Set the word count
+      this.wordCount = words.length;
+    },
     newLetter(letter) {
       // Check if the letter is enter
       if(/^[a-zA-Z]$/.test(letter)){
         this.typed += letter;
-        console.log('typed: ', this.typed);
       } else if(letter === ' ') {
         this.typed += ' ';
         console.log('typed: ', this.typed);

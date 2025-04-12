@@ -2,19 +2,20 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue';
 import WordsComponent from '@/components/WordsComponent.vue'
 import useTestStore from '@/stores/quikTest.js'
+import fetchWords from '@/services/WordBuilderService.js'
 
 const testStore = useTestStore();
 
-onMounted(() => {
+onMounted(async () => {
     
 
     console.log('Component mounted'); // like componentDidMount
-    // Initialize the store or perform any setup logic here
-    testStore.actual = "i can type now";
+    // Fetch data from the API
+    let words = await fetchWords();
+    testStore.setWords(words);
     console.log(testStore.actual);
     window.addEventListener('keydown', (event) => {
-    
-        console.log(event.key);
+
         if (event.key === 'Enter') {
         console.log('Enter key pressed');
         if(testStore.checkSentence()) {
