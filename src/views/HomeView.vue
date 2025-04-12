@@ -43,9 +43,9 @@ onBeforeUnmount(() => {
 <!--  Text Area containing String that will be typed -->
 <!--  Keyboard image -->
 <!--  Retry or new text button -->
-  <p>Hi This is home page</p>
-  <WordsComponent  />
-  <button @click="testStore.reset">Reset</button>
+    <p>Hi This is home page</p>
+    <WordsComponent v-if="testStore.actualList.length" :words="testStore.actualList" />
+    <button @click="testStore.reset">Reset</button>
 </template>
 
 <style scoped>

@@ -1,9 +1,12 @@
 <script setup>
+defineProps({
+    words: Array
+});
 </script>
 
 <template>
-    <p>Words will be displayed here</p>
-    <span>There are five words here</span>
+    
+    <span v-for="word in words">{{ word + " - " }}</span>
 </template>
 
 <style scoped>

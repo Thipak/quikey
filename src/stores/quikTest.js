@@ -5,14 +5,17 @@ const useTestStore = defineStore('test', {
   // Actual sentence - the actual sentence
   state: () => ({
     actual: '',
+    actualList: [],
     typed: '',
     typing: false,
     wordCount: 0,
+    currentWordIndex: 0,
   }),
   getters: {},
   actions:  {
     setWords(words) {
       console.log('words: ', words);
+      this.actualList = words;
       // Set the actual sentence
       this.actual = words.join(' ');
       // Set the word count
@@ -24,11 +27,20 @@ const useTestStore = defineStore('test', {
         this.typed += letter;
       } else if(letter === ' ') {
         this.typed += ' ';
+        this.currentWordIndex++;
+
         console.log('typed: ', this.typed);
       }
     },
     deleteLetter() {
       // Check if the letter is enter
+      if(this.typed.length === 0) {
+        return;
+      }
+      // Check if the letter is space
+      if(this.typed[this.typed.length - 1] === ' ') {
+        this.currentWordIndex--;
+      }
       this.typed = this.typed.slice(0, -1);
       console.log('typed: ', this.typed);
     },
